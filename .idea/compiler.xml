@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="commonSpringCloud" />
         <module name="eureka" />
+        <module name="web" />
       </profile>
     </annotationProcessing>
   </component>
