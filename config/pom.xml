@@ -55,7 +55,7 @@
             </exclusions>
         </dependency>
 
-        <!-- security 敏感加密 -->
+        <!-- security 敏感加密  认证 用户名：user 密码 用户启动时随机生成 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
