@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pan.baseserver.dao.SysUserDao">
+
+    <sql id="orderBy">
+        <!-- 排序方式 -->
+        <choose>
+            <!-- 当排序字段不为空时 -->
+            <when test="order != null and order != ''">
+                <choose>
+                    <!-- 当排序方式不为空时 -->
+                    <when test="sort != null and sort != ''">
+                        ORDER BY ${order} ${sort}
+                    </when>
+                    <otherwise>
+                        ORDER BY ${order} desc
+                    </otherwise>
+                </choose>
+            </when>
+            <otherwise>
+                <choose>
+                    <!-- 当排序方式不为空时 -->
+                    <when test="sort != null and sort != ''">
+                        ORDER BY id ${sort}
+                    </when>
+                    <otherwise>
+                        ORDER BY id desc
+                    </otherwise>
+                </choose>
+            </otherwise>
+        </choose>
+    </sql>
+
+    <!-- 查询用户信息 -->
+    <select id="queryById" parameterType="java.lang.Long" resultType="com.pan.baseserver.entity.SysUserEntity">
+        select id, name, account, password, phone, mail from sys_user where id = #{id};
+    </select>
+
+    <!-- 用户信息集合 -->
+    <select id="queryList" parameterType="java.util.Map" resultType="com.pan.baseserver.entity.SysUserEntity">
+        select
+          id, name, account, password, phone, mail
+        from
+          sys_user
+        where 1 = 1
+        <!-- 用户名查询 -->
+        <if test="name != null and name != ''">
+            and name like CONCAT('%', #{name}, '%')
+        </if>
+        <!-- 账号查询 -->
+        <if test="account != null and account != ''">
+            and account like CONCAT('%', #{account}, '%')
+        </if>
+        <!-- 电话查询 -->
+        <if test="phone != null and phone != ''">
+            and phone like CONCAT('%', #{phone}, '%')
+        </if>
+        <!-- 电邮查询 -->
+        <if test="mail != null and mail != ''">
+            and mail like CONCAT('%', #{mail}, '%')
+        </if>
+        <!-- 排序方式 -->
+        <include refid="orderBy">
+            <property name="sort" value="sort"></property>
+            <property name="order" value="order"></property>
+        </include>
+        <!-- 分页 -->
+        <if test="curPage != null and pageSize != null">
+            limit (#{curPage} * #{pageSize} + 1), #{pageSize}
+        </if>
+    </select>
+
+    <!-- 用户数量查询 -->
+    <select id="countList" parameterType="java.util.Map" resultType="java.lang.Integer">
+      select
+          id, name, account, password, phone, mail
+        from
+          sys_user
+        where 1 = 1
+        <!-- 用户名查询 -->
+        <if test="name != null and name != ''">
+            and name like CONCAT('%', #{name}, '%')
+        </if>
+        <!-- 账号查询 -->
+        <if test="account != null and account != ''">
+            and account like CONCAT('%', #{account}, '%')
+        </if>
+        <!-- 电话查询 -->
+        <if test="phone != null and phone != ''">
+            and phone like CONCAT('%', #{phone}, '%')
+        </if>
+        <!-- 电邮查询 -->
+        <if test="mail != null and mail != ''">
+            and mail like CONCAT('%', #{mail}, '%')
+        </if>
+    </select>
+
+    <!-- 修改 -->
+    <update id="update" parameterType="com.pan.baseserver.entity.SysUserEntity">
+        update sys_user
+        <set>
+            <if test="name != null">name = #{name},</if>
+            <if test="account != null">account = #{account},</if>
+            <if test="password != null">password = #{password},</if>
+            <if test="phone != null">phone = #{phone},</if>
+            <if test="mail != null">mail = #{mail}</if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!-- 删除 -->
+    <delete id="delete" parameterType="java.util.Map">
+        delete from sys_user
+        where 1 = 1
+        <if test="id != null">and id = #{id}</if>
+        <if test="name != null and name != ''">and name = #{name}</if>
+        <if test="account != null and account != ''">and account = #{account}</if>
+        <if test="phone != null and phone != ''">and phone = #{phone}</if>
+        <if test="mail != null and mail != ''">and mail = #{mail}</if>
+    </delete>
+
+    <!-- 插入数据 -->
+    <insert id="insert" parameterType="com.pan.entity.SysUserEntity" useGeneratedKeys="true" keyProperty="id">
+        insert into
+        sys_user(name, account, password, phone, mail)
+        values(#{name},#{account},#{password},#{phone},#{mail})
+    </insert>
+
+</mapper>

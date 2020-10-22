@@ -1,8 +1,14 @@
 package com.pan.web.Controller;
 
+import com.pan.web.feign.UserFeign;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import query.ResultQuery;
+import query.SysUserQuery;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -16,6 +22,9 @@ import javax.servlet.http.HttpServletRequest;
 @RequestMapping(value = "/user")
 public class UserController {
 
+    @Autowired
+    private UserFeign userFeign;
+
     /**
      * 用户列表跳转
      * @param model
@@ -25,6 +34,17 @@ public class UserController {
     @RequestMapping(value = "user")
     public String user(Model model, HttpServletRequest request){
         return "userList";
+    }
+
+    /**
+     * 列表信息
+     * @param userQuery 用户信息条件
+     * @return 列表信息
+     */
+    @RequestMapping(value = "userList", method = RequestMethod.POST)
+    @ResponseBody
+    public ResultQuery userList(SysUserQuery userQuery){
+        return userFeign.queryUserList(userQuery);
     }
 
 }

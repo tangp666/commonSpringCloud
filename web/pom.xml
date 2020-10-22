@@ -61,6 +61,12 @@
             <version>${nekohtml}</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.pan</groupId>
+            <artifactId>common</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
     </dependencies>
 
     <dependencyManagement>

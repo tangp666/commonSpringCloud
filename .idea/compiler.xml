@@ -7,7 +7,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="baseserver" />
-        <module name="commonSpringCloud" />
+        <module name="common" />
         <module name="config" />
         <module name="eureka" />
         <module name="web" />

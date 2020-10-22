@@ -46,6 +46,12 @@
             </exclusions>
         </dependency>
 
+        <!-- web -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
         <!-- eureka-client -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
@@ -99,6 +105,12 @@
             <groupId>tk.mybatis</groupId>
             <artifactId>mapper</artifactId>
             <version>${mapper}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.pan</groupId>
+            <artifactId>common</artifactId>
+            <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
 
