@@ -32,12 +32,12 @@
     </sql>
 
     <!-- 查询用户信息 -->
-    <select id="queryById" parameterType="java.lang.Long" resultType="com.pan.baseserver.entity.SysUserEntity">
+    <select id="queryById" parameterType="java.lang.Long" resultType="entity.SysUserEntity">
         select id, name, account, password, phone, mail from sys_user where id = #{id};
     </select>
 
     <!-- 用户信息集合 -->
-    <select id="queryList" parameterType="java.util.Map" resultType="com.pan.baseserver.entity.SysUserEntity">
+    <select id="queryList" parameterType="java.util.Map" resultType="entity.SysUserEntity">
         select
           id, name, account, password, phone, mail
         from
@@ -96,7 +96,7 @@
     </select>
 
     <!-- 修改 -->
-    <update id="update" parameterType="com.pan.baseserver.entity.SysUserEntity">
+    <update id="update" parameterType="entity.SysUserEntity">
         update sys_user
         <set>
             <if test="name != null">name = #{name},</if>
@@ -120,7 +120,7 @@
     </delete>
 
     <!-- 插入数据 -->
-    <insert id="insert" parameterType="com.pan.entity.SysUserEntity" useGeneratedKeys="true" keyProperty="id">
+    <insert id="insert" parameterType="entity.SysUserEntity" useGeneratedKeys="true" keyProperty="id">
         insert into
         sys_user(name, account, password, phone, mail)
         values(#{name},#{account},#{password},#{phone},#{mail})
