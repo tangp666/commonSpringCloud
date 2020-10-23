@@ -1,5 +1,6 @@
 package com.pan.web.feign;
 
+import com.pan.web.hystrix.SysUserFallBack;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -13,8 +14,8 @@ import query.SysUserQuery;
  * @author joy200300
  * @date 2020/10/21 17:04
  */
-@FeignClient(name = "baseserver")
-public interface UserFeign {
+@FeignClient(name = "baseserver", fallback = SysUserFallBack.class)
+public interface SysUserFeign {
 
     /**
      * 查询用户信息列表

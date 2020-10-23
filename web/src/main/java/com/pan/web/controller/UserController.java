@@ -1,6 +1,6 @@
-package com.pan.web.Controller;
+package com.pan.web.controller;
 
-import com.pan.web.feign.UserFeign;
+import com.pan.web.feign.SysUserFeign;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,7 +23,7 @@ import javax.servlet.http.HttpServletRequest;
 public class UserController {
 
     @Autowired
-    private UserFeign userFeign;
+    private SysUserFeign userFeign;
 
     /**
      * 用户列表跳转
