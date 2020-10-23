@@ -65,7 +65,7 @@
             <property name="order" value="order"></property>
         </include>
         <!-- 分页 -->
-        <if test="curPage != null and pageSize != null">
+        <if test="curPage != null and pageSize != null and pageSize > 0">
             limit (#{curPage} * #{pageSize} + 1), #{pageSize}
         </if>
     </select>
@@ -73,7 +73,7 @@
     <!-- 用户数量查询 -->
     <select id="countList" parameterType="java.util.Map" resultType="java.lang.Integer">
       select
-          id, name, account, password, phone, mail
+          count(1)
         from
           sys_user
         where 1 = 1
